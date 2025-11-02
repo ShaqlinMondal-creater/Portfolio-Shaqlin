@@ -2,11 +2,11 @@
   "projects": [
     {
       "type": "ecommerce",
-      "name": "ShopSphere",
+      "name": "Haneri",
       "description": "Full-stack store with payments, coupons, and admin analytics.",
       "tags": ["Laravel", "MySQL", "Tailwind"],
-      "url": "https://example.com/shopsphere",
-      "image": "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600"
+      "url": "https://haneri.com",
+      "image": "../img/projects/haneri_1st.png?auto=compress&cs=tinysrgb&w=600"
     },
     {
       "type": "ecommerce",
