@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "type": "ecommerce",
+      "name": "ShopSphere",
+      "description": "Full-stack store with payments, coupons, and admin analytics.",
+      "tags": ["Laravel", "MySQL", "Tailwind"],
+      "url": "https://example.com/shopsphere",
+      "image": "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "ecommerce",
+      "name": "CartCraft",
+      "description": "Multi-vendor marketplace with GST-ready invoicing.",
+      "tags": ["Laravel", "REST API", "Razorpay"],
+      "url": "https://example.com/cartcraft",
+      "image": "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "woocommerce",
+      "name": "NeoMart",
+      "description": "WooCommerce storefront with custom checkout and GST.",
+      "tags": ["WordPress", "WooCommerce", "cPanel"],
+      "url": "https://example.com/neomart",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "institution",
+      "name": "CampusConnect",
+      "description": "Institution portal with student login, forms, and results.",
+      "tags": ["Laravel", "MySQL", "REST API"],
+      "url": "https://example.com/campusconnect",
+      "image": "https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "inventory",
+      "name": "StockTrack",
+      "description": "Inventory management with pick lists, stock transfer, and logs.",
+      "tags": ["Laravel", "MySQL", "Redis"],
+      "url": "https://example.com/stocktrack",
+      "image": "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "portfolio",
+      "name": "BrightWorks",
+      "description": "Company portfolio site with services, case studies, and contact flows.",
+      "tags": ["Tailwind", "Laravel", "SEO"],
+      "url": "https://example.com/brightworks",
+      "image": "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ]
+}
