@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Professional Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .slide-in-right {
+      animation: slideInRight 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .card-3d:hover {
+      transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+    }
+
+    .skill-bar {
+      position: relative;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      animation: progressBar 2s ease-out forwards;
+      transform-origin: left;
+    }
+
+    @keyframes progressBar {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .project-card:hover::before {
+      left: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -6px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #667eea;
+      box-shadow: 0 0 20px #667eea;
+    }
+
+    .sphere {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      animation: moveSphere 20s infinite alternate;
+    }
+
+    @keyframes moveSphere {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100px, 100px); }
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      z-index: 9999;
+      transition: width 0.1s;
+    }
+
+    @media (max-width: 768px) {
+      .card-3d:hover {
+        transform: scale(1.02);
+      }
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="scroll-indicator" id="scrollIndicator"></div>
+
+  <div class="sphere w-96 h-96 bg-blue-500 top-20 -left-20"></div>
+  <div class="sphere w-80 h-80 bg-purple-500 top-1/2 right-0"></div>
+  <div class="sphere w-72 h-72 bg-pink-500 bottom-20 left-1/3"></div>
+
+  <nav class="fixed top-0 w-full z-50 glass-effect">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold gradient-text">Portfolio</div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="nav-link hover:text-blue-400">About</a>
+          <a href="#education" class="nav-link hover:text-blue-400">Education</a>
+          <a href="#experience" class="nav-link hover:text-blue-400">Experience</a>
+          <a href="#skills" class="nav-link hover:text-blue-400">Skills</a>
+          <a href="#projects" class="nav-link hover:text-blue-400">Projects</a>
+          <a href="#contact" class="nav-link hover:text-blue-400">Contact</a>
+        </div>
+        <button id="menuBtn" class="md:hidden text-white">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+      <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-3">
+        <a href="#about" class="block hover:text-blue-400">About</a>
+        <a href="#education" class="block hover:text-blue-400">Education</a>
+        <a href="#experience" class="block hover:text-blue-400">Experience</a>
+        <a href="#skills" class="block hover:text-blue-400">Skills</a>
+        <a href="#projects" class="block hover:text-blue-400">Projects</a>
+        <a href="#contact" class="block hover:text-blue-400">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="about" class="min-h-screen flex items-center justify-center pt-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="slide-in-left" style="animation-delay: 0.2s;">
+          <div class="floating">
+            <div class="relative w-80 h-80 mx-auto">
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-xl opacity-50"></div>
+              <img src="img/generic-3.jpg?auto=compress&cs=tinysrgb&w=600"
+                   alt="Profile"
+                   class="relative rounded-full w-full h-full object-cover border-4 border-white/20">
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-in-right" style="animation-delay: 0.4s;">
+          <h1 class="text-5xl md:text-7xl font-bold mb-4">
+            Hi, I'm <span class="gradient-text">Shaqlin Mondal</span>
+          </h1>
+          <h2 class="text-2xl md:text-3xl text-blue-300 mb-6">Full Stack Developer</h2>
+          <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+            Come across the coding industry which fascinated me a lot and made me feel very enthusiastic to work and solve the complex problems.
+            With 1.5+ years of experience in web development, I'm very eager to serve a dynamic team and learn as much as I can in this everyday growing field.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-8">
+            <div class="glass-effect px-6 py-3 rounded-full">
+              <i class="fas fa-map-marker-alt text-blue-400 mr-2"></i>
+              Kolkata, West Bengal
+            </div>
+            <div class="glass-effect px-6 py-3 rounded-full">
+              <i class="fas fa-envelope text-blue-400 mr-2"></i>
+              shaqlinmondal8905@gmail.com
+            </div>
+            <div class="glass-effect px-6 py-3 rounded-full">
+              <i class="fas fa-phone text-blue-400 mr-2"></i>
+              +91 8597148785
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <a href="https://github.com/ShaqlinMondal-creater" target="_blank" class="w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-white/10 transition">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/shaqlin2021" target="_blank" class="w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-white/10 transition">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <!-- <a href="https://twitter.com" target="_blank" class="w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-white/10 transition">
+              <i class="fab fa-twitter text-xl"></i>
+            </a> -->
+            <a href="https://www.instagram.com/shaqlin_/" target="_blank" class="w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-white/10 transition">
+              <i class="fab fa-instagram text-xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">Education</h2>
+
+      <div class="space-y-8">
+        <!-- <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Master of Computer Science</h3>
+              <p class="text-gray-400 text-lg">Stanford University</p>
+            </div>
+            <div class="text-gray-400 mt-2 md:mt-0">
+              <i class="far fa-calendar mr-2"></i>2018 - 2020
+            </div>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Specialized in Artificial Intelligence and Machine Learning.
+            Graduated with honors (GPA: 3.9/4.0). Thesis on Neural Networks for Natural Language Processing.
+          </p>
+        </div> -->
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Bachelor of Technology in Electronics & Communication Engineering</h3>
+              <p class="text-gray-400 text-lg">Maulana Abul Kalam Azad University of Technology, GMIT, Kolkata</p>
+            </div>
+            <div class="text-gray-400 mt-2 md:mt-0">
+              <i class="far fa-calendar mr-2"></i>2019 - 2023
+            </div>
+          </div>
+          <!-- <p class="text-gray-300 leading-relaxed">
+            Focus on software engineering and web development.
+          </p> -->
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Higher Secondary Education</h3>
+              <p class="text-gray-400 text-lg">Dighirparh High Madrasah, Galsi, Burdwan</p>
+            </div>
+            <div class="text-gray-400 mt-2 md:mt-0">
+              <i class="far fa-calendar mr-2"></i>2017 - 2019
+            </div>
+          </div>
+          <!-- <p class="text-gray-300 leading-relaxed">
+            Graduated with distinction. Advanced Placement courses in Mathematics 
+          </p> -->
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Secondary Education</h3>
+              <p class="text-gray-400 text-lg">Memari V.M Institution, Memari, Burdwan</p>
+            </div>
+            <div class="text-gray-400 mt-2 md:mt-0">
+              <i class="far fa-calendar mr-2"></i>2013 - 2017
+            </div>
+          </div>
+          <!-- <p class="text-gray-300 leading-relaxed">
+            Specialized in Artificial Intelligence and Machine Learning.
+            Graduated with honors (GPA: 3.9/4.0). Thesis on Neural Networks for Natural Language Processing.
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">Experience</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Employee as PHP Developer</h3>
+              <p class="text-gray-400 text-lg">Dotcom Solutions, Kolkata</p>
+            </div>
+            <span class="px-4 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Current</span>
+          </div>
+          <p class="text-gray-400 mb-4">
+            <i class="far fa-calendar mr-2"></i>July 2024 - Present
+          </p>
+          <ul class="text-gray-300 space-y-2">
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Developing scalable web applications using <strong>Laravel</strong> framework.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Building and integrating <strong>RESTful APIs</strong> between front-end and back-end systems.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Designing and managing efficient <strong>database architectures</strong> with MySQL.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Implementing dynamic front-end layouts using <strong>Tailwind CSS</strong> and responsive UI design principles.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Developing and maintaining <strong>Core PHP</strong> and <strong>Laravel-based</strong> websites.</li>  
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Creating <strong>eCommerce</strong> and <strong>WooCommerce</strong> websites with integrated payment and product management systems.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Automating <strong>data import and export</strong> operations between Excel/CSV sheets and databases.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Ensuring clean, secure, and optimized <strong>PHP</strong> code for high-performance applications.</li>
+          </ul>
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Industrial Internship in php & WordPress</h3>
+              <p class="text-gray-400 text-lg">Euphoria Genx, Kolkata</p>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-4">
+            <i class="far fa-calendar mr-2"></i>September 2023 - April 2024
+          </p>
+          <ul class="text-gray-300 space-y-2">
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Learned core concepts of <strong>PHP programming</strong> including syntax, functions, and object-oriented principles.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Gained hands-on experience with <strong>WordPress</strong> theme customization and plugin development.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Understood <strong>MySQL</strong> basics and performed CRUD operations through PHP and WordPress.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Worked on small projects to connect <strong>HTML forms</strong> with backend PHP logic.</li>
+
+          </ul>
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">Intern – MEAN Stack Developer</h3>
+              <p class="text-gray-400 text-lg">BASSETTI ITES PVT. LTD, Kolkata</p>
+            </div>
+          </div>
+          <p class="text-gray-400 mb-4">
+            <i class="far fa-calendar mr-2"></i>September 2022 - January 2023
+          </p>
+          <ul class="text-gray-300 space-y-2">
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Learned the fundamentals of the <strong>MEAN stack</strong> – MongoDB, Express.js, Angular, and Node.js.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Built simple <strong>CRUD applications</strong> using Node.js and Express.js for server-side development.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Developed a basic understanding of <strong>JavaScript ES6+</strong> and asynchronous programming concepts.</li>
+          </ul>
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 card-3d">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-300">As Self Learner</h3>
+              <p class="text-gray-400 text-lg">Independent Learner</p>
+            </div>
+          </div>
+          <!-- <p class="text-gray-400 mb-4">
+            <i class="far fa-calendar mr-2"></i>2016 - 2018
+          </p> -->
+          <ul class="text-gray-300 space-y-2">
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Started journey in programming through <strong>self-learning</strong> and online tutorials.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Learned <strong>HTML</strong> and <strong>CSS</strong> for creating structured and styled web pages.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Understood the <strong>basics of JavaScript</strong> for interactivity and dynamic front-end logic.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Explored programming logic using <strong>Core Java</strong> and <strong>C#</strong> to build a strong OOP foundation.</li>
+            <li><i class="fas fa-check text-blue-400 mr-2"></i>Gained introductory knowledge of <strong>React.js</strong> and component-based UI structure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 glass-effect rounded-2xl p-8">
+        <h3 class="text-2xl font-bold text-blue-300 mb-4">Employment Status</h3>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-300 text-lg">Currently employed as Mid-Senior PHP Full Stack Developer</p>
+            <!-- <p class="text-gray-400">Available for freelance projects and consulting</p> -->
+          </div>
+          <div class="hidden md:block">
+            <span class="px-6 py-3 bg-green-500/20 text-green-400 rounded-full font-semibold">
+              <i class="fas fa-circle text-xs mr-2"></i>Available
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">Skills & Technologies</h2>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Programming Languages -->
+        <div class="glass-effect rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-blue-300 mb-6 flex items-center">
+            <i class="fas fa-code mr-3"></i>Programming Languages
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">PHP</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Strong</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-500" style="width: 80%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">JavaScript</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Good</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-400" style="width: 60%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">HTML / CSS</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Strong</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-500" style="width: 80%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">C# / Java</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Basic</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-300" style="width: 45%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">MySQL</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Strong</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-500" style="width: 80%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frameworks & Libraries -->
+        <div class="glass-effect rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-blue-300 mb-6 flex items-center">
+            <i class="fas fa-layer-group mr-3"></i>Frameworks & Libraries
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">Laravel</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Strong</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-500" style="width: 80%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">React</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Basic</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-300" style="width: 45%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">Node.js / Express</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Intermediate</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-400" style="width: 35%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">WordPress / WooCommerce</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Good</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-400" style="width: 60%;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-300">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Strong</span>
+              </div>
+              <div class="skill-bar"><div class="skill-progress bg-blue-500" style="width: 80%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .skill-bar {
+          height: 8px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 4px;
+          overflow: hidden;
+        }
+        .skill-progress {
+          height: 100%;
+          border-radius: 4px;
+          background: linear-gradient(to right, #38bdf8, #3b82f6);
+        }
+      </style>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Databases -->
+        <div class="glass-effect rounded-2xl p-6 card-3d">
+          <div class="text-center">
+            <i class="fas fa-database text-4xl text-blue-400 mb-4"></i>
+            <h4 class="text-xl font-bold mb-3">Database Management</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="tag"><span>MySQL / MariaDB</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>SQLite</span><span class="lvl lvl-good">Good</span></span>
+              <span class="tag"><span>MongoDB</span><span class="lvl lvl-basic">Basic</span></span>
+              <span class="tag"><span>phpMyAdmin</span><span class="lvl lvl-strong">Strong</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Development Tools -->
+        <div class="glass-effect rounded-2xl p-6 card-3d">
+          <div class="text-center">
+            <i class="fas fa-cogs text-4xl text-blue-400 mb-4"></i>
+            <h4 class="text-xl font-bold mb-3">Development & Deployment Tools</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="tag"><span>Git / GitHub</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>Composer</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>cPanel / Plesk</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>Apache</span><span class="lvl lvl-good">Good</span></span>
+              <span class="tag"><span>Postman (API Testing)</span><span class="lvl lvl-strong">Strong</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design & Integrations -->
+        <div class="glass-effect rounded-2xl p-6 card-3d">
+          <div class="text-center">
+            <i class="fas fa-palette text-4xl text-blue-400 mb-4"></i>
+            <h4 class="text-xl font-bold mb-3">Design & Integrations</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="tag"><span>Tailwind CSS</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>REST API Development</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>Excel / CSV Import–Export</span><span class="lvl lvl-strong">Strong</span></span>
+              <span class="tag"><span>WordPress / WooCommerce</span><span class="lvl lvl-good">Good</span></span>
+              <span class="tag"><span>Payment Gateway Integration</span><span class="lvl lvl-good">Good</span></span>
+              <span class="tag"><span>Google Sheets / Apps Script</span><span class="lvl lvl-good">Good</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 0.4rem 0.6rem;
+          background: rgba(255,255,255,0.08);
+          border-radius: 9999px;
+          font-size: 0.85rem;
+          line-height: 1;
+        }
+        .lvl {
+          padding: 0.15rem 0.5rem;
+          border-radius: 9999px;
+          font-size: 0.72rem;
+          line-height: 1;
+          border: 1px solid transparent;
+        }
+        .lvl-basic  { background: rgba(148,163,184,0.15); color: #cbd5e1; border-color: rgba(148,163,184,0.35); }
+        .lvl-good   { background: rgba(59,130,246,0.15);  color: #93c5fd; border-color: rgba(59,130,246,0.35); }
+        .lvl-strong { background: rgba(16,185,129,0.15); color: #6ee7b7; border-color: rgba(16,185,129,0.35); }
+      </style>
+    </div>
+  </section>
+
+  <!-- <section id="projects" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">Featured Projects</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project1', '_blank')">
+          <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 1"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">E-Commerce Platform</h3>
+            <p class="text-gray-400 mb-4">Full-stack online shopping platform with payment integration, user authentication, and admin dashboard.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">React</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Node.js</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">MongoDB</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project2', '_blank')">
+          <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 2"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">Social Media Dashboard</h3>
+            <p class="text-gray-400 mb-4">Analytics dashboard for social media management with real-time data visualization and reporting.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Vue.js</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Python</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">PostgreSQL</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project3', '_blank')">
+          <img src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 3"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">Task Management App</h3>
+            <p class="text-gray-400 mb-4">Collaborative task management tool with team features, notifications, and project tracking.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Next.js</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">GraphQL</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Firebase</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project4', '_blank')">
+          <img src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 4"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">AI Chatbot Platform</h3>
+            <p class="text-gray-400 mb-4">Intelligent chatbot solution using natural language processing for customer support automation.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Python</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">TensorFlow</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">FastAPI</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project5', '_blank')">
+          <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 5"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">Real Estate Portal</h3>
+            <p class="text-gray-400 mb-4">Property listing platform with advanced search, virtual tours, and appointment scheduling.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">React</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Express</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">MySQL</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card glass-effect rounded-2xl overflow-hidden" onclick="window.open('https://example.com/project6', '_blank')">
+          <img src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Project 6"
+               class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">Fitness Tracking App</h3>
+            <p class="text-gray-400 mb-4">Mobile-responsive fitness app with workout plans, progress tracking, and nutrition guidance.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">React Native</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Node.js</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs">Redis</span>
+            </div>
+            <div class="flex items-center text-sm text-gray-400">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Click to visit
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section id="projects" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-10 gradient-text">Featured Projects</h2>
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <a href="projects.html?type=ecommerce" class="tab-pill">E-commerce</a>
+        <a href="projects.html?type=woocommerce" class="tab-pill">WooCommerce</a>
+        <a href="projects.html?type=institution" class="tab-pill">Institution Portal</a>
+        <a href="projects.html?type=inventory" class="tab-pill">Inventory Management</a>
+        <a href="projects.html?type=portfolio" class="tab-pill">Company Portfolio</a>
+      </div>
+
+      <!-- Sample cards (featured mix) -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- E-commerce -->
+        <div class="project-card glass-effect rounded-2xl overflow-hidden">
+          <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ShopSphere" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">ShopSphere</h3>
+            <p class="text-gray-400 mb-4">Full-stack online store with payments, coupons, and admin analytics.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">Tailwind</span>
+            </div>
+            <button class="visit-btn" onclick="window.open('https://example.com/shopsphere', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        </div>
+
+        <!-- WooCommerce -->
+        <div class="project-card glass-effect rounded-2xl overflow-hidden">
+          <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="NeoMart" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">NeoMart</h3>
+            <p class="text-gray-400 mb-4">WooCommerce storefront with custom checkout and GST invoicing.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag-sm">WordPress</span><span class="tag-sm">WooCommerce</span><span class="tag-sm">cPanel</span>
+            </div>
+            <button class="visit-btn" onclick="window.open('https://example.com/neomart', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        </div>
+
+        <!-- Institution -->
+        <div class="project-card glass-effect rounded-2xl overflow-hidden">
+          <img src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=600" alt="CampusConnect" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">CampusConnect</h3>
+            <p class="text-gray-400 mb-4">Institution portal with student login, forms, and result publishing.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">REST API</span>
+            </div>
+            <button class="visit-btn" onclick="window.open('https://example.com/campusconnect', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        </div>
+
+        <!-- Inventory -->
+        <div class="project-card glass-effect rounded-2xl overflow-hidden">
+          <img src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600" alt="StockTrack" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">StockTrack</h3>
+            <p class="text-gray-400 mb-4">Inventory management with pick lists, stock transfer, and logs.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">Redis</span>
+            </div>
+            <button class="visit-btn" onclick="window.open('https://example.com/stocktrack', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="project-card glass-effect rounded-2xl overflow-hidden">
+          <img src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=600" alt="BrightWorks" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">BrightWorks</h3>
+            <p class="text-gray-400 mb-4">Company portfolio site with services, case studies, and contact flows.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag-sm">Tailwind</span><span class="tag-sm">Laravel</span><span class="tag-sm">SEO</span>
+            </div>
+            <button class="visit-btn" onclick="window.open('https://example.com/brightworks', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<style>
+  .tab-pill{
+    padding:.5rem .9rem;border:1px solid rgba(59,130,246,.3);
+    background:rgba(59,130,246,.08);color:#93c5fd;border-radius:9999px;
+    font-size:.9rem
+  }
+  .tag-sm{padding:.25rem .6rem;background:rgba(255,255,255,.08);border-radius:9999px;font-size:.7rem}
+  .visit-btn{display:inline-flex;align-items:center;font-size:.9rem;color:#cbd5e1}
+</style>
+
+  <section id="contact" class="min-h-screen py-20 px-6">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">Get In Touch</h2>
+
+      <div class="glass-effect rounded-2xl p-8 md:p-12">
+        <div class="text-center mb-8">
+          <p class="text-xl text-gray-300 mb-6">
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+          <div class="text-center p-6 glass-effect rounded-xl">
+            <i class="fas fa-envelope text-3xl text-blue-400 mb-3"></i>
+            <h4 class="font-semibold mb-2">Email</h4>
+            <p class="text-gray-400">john@example.com</p>
+          </div>
+          <div class="text-center p-6 glass-effect rounded-xl">
+            <i class="fas fa-phone text-3xl text-blue-400 mb-3"></i>
+            <h4 class="font-semibold mb-2">Phone</h4>
+            <p class="text-gray-400">+1 234 567 8900</p>
+          </div>
+          <div class="text-center p-6 glass-effect rounded-xl">
+            <i class="fas fa-map-marker-alt text-3xl text-blue-400 mb-3"></i>
+            <h4 class="font-semibold mb-2">Location</h4>
+            <p class="text-gray-400">San Francisco, CA</p>
+          </div>
+        </div>
+
+        <form class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <input type="text" placeholder="Your Name"
+                   class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-400 transition">
+            <input type="email" placeholder="Your Email"
+                   class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-400 transition">
+          </div>
+          <input type="text" placeholder="Subject"
+                 class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-400 transition">
+          <textarea placeholder="Your Message" rows="6"
+                    class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-blue-400 transition resize-none"></textarea>
+          <button type="submit"
+                  class="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 px-6 glass-effect">
+    <div class="container mx-auto max-w-6xl">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 mb-4 md:mb-0">
+          &copy; 2025 John Doe. All rights reserved.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="text-gray-400 hover:text-white transition">
+            <i class="fab fa-instagram text-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scrollIndicator').style.width = scrolled + '%';
+    });
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card-3d, .project-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
