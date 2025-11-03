@@ -856,19 +856,19 @@
     <div class="container mx-auto max-w-6xl">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 mb-4 md:mb-0">
-          &copy; 2025 John Doe. All rights reserved.
+          &copy; 2025 Shaqlin Mondal
         </p>
         <div class="flex gap-4">
-          <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition">
+          <a href="https://github.com/ShaqlinMondal-creater" target="_blank" class="text-gray-400 hover:text-white transition">
             <i class="fab fa-github text-xl"></i>
           </a>
-          <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition">
+          <a href="https://www.linkedin.com/in/shaqlin2021" target="_blank" class="text-gray-400 hover:text-white transition">
             <i class="fab fa-linkedin text-xl"></i>
           </a>
-          <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white transition">
+          <!-- <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white transition">
             <i class="fab fa-twitter text-xl"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="text-gray-400 hover:text-white transition">
+          </a> -->
+          <a href="https://www.instagram.com/shaqlin_/" target="_blank" class="text-gray-400 hover:text-white transition">
             <i class="fab fa-instagram text-xl"></i>
           </a>
         </div>
@@ -932,7 +932,7 @@
       showSkeleton(grid, 6);
 
       try {
-        const res = await fetch('projects.json', { cache: 'no-store' });
+        const res = await fetch('Json/projects.json', { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed to load projects.json');
         const data = await res.json();
 

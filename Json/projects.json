@@ -68,7 +68,7 @@
       "type": "portfolio",
       "name": "Safe Technical India -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Tailwind", "PHP"],
+      "tags": ["Wordpress"],
       "url": "https://www.safetechnicalindia.in",
       "image": "../img/projects/safetech1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -76,7 +76,7 @@
       "type": "portfolio",
       "name": "Safe Technical -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Tailwind", "PHP"],
+      "tags": ["Wordpress"],
       "url": "https://www.safetechnical.in",
       "image": "../img/projects/safetechcom.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -84,7 +84,7 @@
       "type": "portfolio",
       "name": "Fluidtech -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Tailwind", "PHP"],
+      "tags": ["Wordpress"],
       "url": "https://fluidtech.co",
       "image": "../img/projects/fluidtect1.png?auto=compress&cs=tinysrgb&w=600"
     }
