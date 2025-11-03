@@ -784,99 +784,24 @@
         <a href="projects.html?type=ecommerce" class="tab-pill">E-commerce</a>
         <a href="projects.html?type=woocommerce" class="tab-pill">WooCommerce</a>
         <a href="projects.html?type=institution" class="tab-pill">Institution Portal</a>
-        <a href="projects.html?type=inventory" class="tab-pill">Inventory Management</a>
+        <!-- <a href="projects.html?type=inventory" class="tab-pill">Inventory Management</a> -->
         <a href="projects.html?type=portfolio" class="tab-pill">Company Portfolio</a>
       </div>
 
-      <!-- Sample cards (featured mix) -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- E-commerce -->
-        <div class="project-card glass-effect rounded-2xl overflow-hidden">
-          <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ShopSphere" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">ShopSphere</h3>
-            <p class="text-gray-400 mb-4">Full-stack online store with payments, coupons, and admin analytics.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">Tailwind</span>
-            </div>
-            <button class="visit-btn" onclick="window.open('https://example.com/shopsphere', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        </div>
-
-        <!-- WooCommerce -->
-        <div class="project-card glass-effect rounded-2xl overflow-hidden">
-          <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="NeoMart" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">NeoMart</h3>
-            <p class="text-gray-400 mb-4">WooCommerce storefront with custom checkout and GST invoicing.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="tag-sm">WordPress</span><span class="tag-sm">WooCommerce</span><span class="tag-sm">cPanel</span>
-            </div>
-            <button class="visit-btn" onclick="window.open('https://example.com/neomart', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        </div>
-
-        <!-- Institution -->
-        <div class="project-card glass-effect rounded-2xl overflow-hidden">
-          <img src="https://images.pexels.com/photos/5475765/pexels-photo-5475765.jpeg?auto=compress&cs=tinysrgb&w=600" alt="CampusConnect" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">CampusConnect</h3>
-            <p class="text-gray-400 mb-4">Institution portal with student login, forms, and result publishing.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">REST API</span>
-            </div>
-            <button class="visit-btn" onclick="window.open('https://example.com/campusconnect', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        </div>
-
-        <!-- Inventory -->
-        <div class="project-card glass-effect rounded-2xl overflow-hidden">
-          <img src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600" alt="StockTrack" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">StockTrack</h3>
-            <p class="text-gray-400 mb-4">Inventory management with pick lists, stock transfer, and logs.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="tag-sm">Laravel</span><span class="tag-sm">MySQL</span><span class="tag-sm">Redis</span>
-            </div>
-            <button class="visit-btn" onclick="window.open('https://example.com/stocktrack', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        </div>
-
-        <!-- Portfolio -->
-        <div class="project-card glass-effect rounded-2xl overflow-hidden">
-          <img src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=600" alt="BrightWorks" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">BrightWorks</h3>
-            <p class="text-gray-400 mb-4">Company portfolio site with services, case studies, and contact flows.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="tag-sm">Tailwind</span><span class="tag-sm">Laravel</span><span class="tag-sm">SEO</span>
-            </div>
-            <button class="visit-btn" onclick="window.open('https://example.com/brightworks', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        </div>
-      </div>
+      <!-- Cards injected here -->
+      <div id="all-projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </div>
   </section>
 
-<style>
-  .tab-pill{
-    padding:.5rem .9rem;border:1px solid rgba(59,130,246,.3);
-    background:rgba(59,130,246,.08);color:#93c5fd;border-radius:9999px;
-    font-size:.9rem
-  }
-  .tag-sm{padding:.25rem .6rem;background:rgba(255,255,255,.08);border-radius:9999px;font-size:.7rem}
-  .visit-btn{display:inline-flex;align-items:center;font-size:.9rem;color:#cbd5e1}
-</style>
+  <style>
+    .tab-pill{
+      padding:.5rem .9rem;border:1px solid rgba(59,130,246,.3);
+      background:rgba(59,130,246,.08);color:#93c5fd;border-radius:9999px;
+      font-size:.9rem
+    }
+    .tag-sm{padding:.25rem .6rem;background:rgba(255,255,255,.08);border-radius:9999px;font-size:.7rem}
+    .visit-btn{display:inline-flex;align-items:center;font-size:.9rem;color:#cbd5e1}
+  </style>
 
   <section id="contact" class="min-h-screen py-20 px-6">
     <div class="container mx-auto max-w-4xl">
@@ -997,6 +922,110 @@
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
     });
+  </script>
+  <script>
+    // Reuse this across pages if you want
+    async function loadAllProjects() {
+      const grid = document.getElementById('all-projects-grid');
+      if (!grid) return;
+
+      showSkeleton(grid, 6);
+
+      try {
+        const res = await fetch('projects.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load projects.json');
+        const data = await res.json();
+
+        const items = data?.projects || [];
+        renderAllProjectCards(grid, items);
+
+        if (!items.length) {
+          grid.innerHTML = `
+            <div class="col-span-full text-center text-slate-400">
+              No projects to display yet.
+            </div>`;
+        }
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = `
+          <div class="col-span-full text-center text-rose-300">
+            Could not load projects. Please try again later.
+          </div>`;
+      }
+    }
+
+    function renderAllProjectCards(grid, items) {
+      grid.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'project-card glass-effect rounded-2xl overflow-hidden';
+
+        const typePill = typeToLabel(item.type);
+
+        card.innerHTML = `
+          <div class="relative">
+            <img
+              src="${item.image}"
+              alt="${escapeHtml(item.name)}"
+              class="w-full h-48 object-cover"
+              loading="lazy"
+              onerror="this.src='https://picsum.photos/600/300?grayscale&random=${Math.floor(Math.random()*1000)}'">
+            ${typePill ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs bg-black/40 text-slate-200 border border-white/10">${typePill}</span>` : ''}
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-blue-300 mb-2">${escapeHtml(item.name)}</h3>
+            <p class="text-gray-400 mb-4">${escapeHtml(item.description)}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              ${(item.tags || []).map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
+            </div>
+            <button class="visit-btn" onclick="window.open('${item.url}', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>Visit
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function typeToLabel(type) {
+      const map = {
+        ecommerce: 'E-commerce',
+        woocommerce: 'WooCommerce',
+        institution: 'Institution Portal',
+        inventory: 'Inventory Management',
+        portfolio: 'Company Portfolio'
+      };
+      return map[(type || '').toLowerCase()] || '';
+    }
+
+    function showSkeleton(grid, count = 6) {
+      grid.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const card = document.createElement('div');
+        card.className = 'glass-effect rounded-2xl overflow-hidden';
+        card.innerHTML = `
+          <div class="skeleton" style="height:12rem;"></div>
+          <div class="p-6">
+            <div class="skeleton" style="height:24px;width:60%;margin-bottom:.75rem;"></div>
+            <div class="skeleton" style="height:14px;width:90%;margin-bottom:1rem;"></div>
+            <div class="flex gap-2 mb-4">
+              <div class="skeleton" style="height:22px;width:70px;border-radius:9999px;"></div>
+              <div class="skeleton" style="height:22px;width:70px;border-radius:9999px;"></div>
+              <div class="skeleton" style="height:22px;width:70px;border-radius:9999px;"></div>
+            </div>
+            <div class="skeleton" style="height:18px;width:110px;"></div>
+          </div>`;
+        grid.appendChild(card);
+      }
+    }
+
+    function escapeHtml(str = '') {
+      return String(str).replace(/[&<>"']/g, s => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[s]);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAllProjects);
   </script>
 </body>
 </html>

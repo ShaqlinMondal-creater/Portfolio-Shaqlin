@@ -90,3 +90,12 @@
     }
   ]
 }
+
+    {
+      "type": "inventory",
+      "name": "StockTrack",
+      "description": "Inventory management with pick lists, stock transfer, and logs.",
+      "tags": ["Laravel", "MySQL", "Redis"],
+      "url": "https://example.com/stocktrack",
+      "image": "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
