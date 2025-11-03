@@ -4,17 +4,17 @@
       "type": "ecommerce",
       "name": "Haneri",
       "description": "Full-stack store with payments, coupons, and admin analytics.",
-      "tags": ["Laravel", "MySQL", "Tailwind"],
+      "tags": ["Laravel", "MySQL", "Tailwind","Razorpay"],
       "url": "https://haneri.com",
       "image": "../img/projects/haneri_1st.png?auto=compress&cs=tinysrgb&w=600"
     },
     {
       "type": "ecommerce",
-      "name": "CartCraft",
+      "name": "Stockout",
       "description": "Multi-vendor marketplace with GST-ready invoicing.",
       "tags": ["Laravel", "REST API", "Razorpay"],
-      "url": "https://example.com/cartcraft",
-      "image": "https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=600"
+      "url": "https://stockoutindia.com",
+      "image": "img/projects/stockout1.png?auto=compress&cs=tinysrgb&w=600"
     },
     {
       "type": "woocommerce",
