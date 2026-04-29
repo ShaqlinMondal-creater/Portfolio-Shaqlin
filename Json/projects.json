@@ -2,17 +2,39 @@
   "projects": [
     {
       "type": "ecommerce",
+      "name": "Liwaas",
+      "description": "Own Brand fashion store with payments, coupons, and admin analytics.",
+      "tags": [
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Razorpay"
+      ],
+      "url": "https://liwaas.com",
+      "image": "img/projects/liwaas_1st.png?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "type": "ecommerce",
       "name": "Haneri",
       "description": "Full-stack store with payments, coupons, and admin analytics.",
-      "tags": ["Laravel", "MySQL", "Tailwind","Razorpay"],
+      "tags": [
+        "Laravel",
+        "MySQL",
+        "Tailwind",
+        "Razorpay"
+      ],
       "url": "https://haneri.com",
       "image": "img/projects/haneri_1st.png?auto=compress&cs=tinysrgb&w=600"
     },
     {
       "type": "ecommerce",
       "name": "Stockout",
-      "description": "Multi-vendor marketplace with GST-ready invoicing.",
-      "tags": ["Laravel", "REST API", "Razorpay"],
+      "description": "Multi-vendor marketplace",
+      "tags": [
+        "Laravel",
+        "REST API",
+        "Razorpay"
+      ],
       "url": "https://stockoutindia.com",
       "image": "img/projects/stockout1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -20,7 +42,11 @@
       "type": "woocommerce",
       "name": "Anhussanally",
       "description": "WooCommerce storefront .",
-      "tags": ["PHP", "WooCommerce", "cPanel"],
+      "tags": [
+        "PHP",
+        "WooCommerce",
+        "cPanel"
+      ],
       "url": "https://anhussunally.com",
       "image": "img/projects/anh1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -28,7 +54,11 @@
       "type": "woocommerce",
       "name": "Johar Traders",
       "description": "WooCommerce storefront .",
-      "tags": ["PHP", "WooCommerce", "cPanel"],
+      "tags": [
+        "PHP",
+        "WooCommerce",
+        "cPanel"
+      ],
       "url": "https://johartraders.in",
       "image": "img/projects/johar1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -36,7 +66,11 @@
       "type": "woocommerce",
       "name": "Sakberally",
       "description": "WooCommerce storefront .",
-      "tags": ["PHP", "WooCommerce", "cPanel"],
+      "tags": [
+        "PHP",
+        "WooCommerce",
+        "cPanel"
+      ],
       "url": "https://sakberally.com/",
       "image": "img/projects/sakberally1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -44,7 +78,11 @@
       "type": "woocommerce",
       "name": "Frosty Business",
       "description": "WooCommerce storefront .",
-      "tags": ["PHP", "WooCommerce", "cPanel"],
+      "tags": [
+        "PHP",
+        "WooCommerce",
+        "cPanel"
+      ],
       "url": "https://frostybusiness.com",
       "image": "img/projects/frosty1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -52,7 +90,11 @@
       "type": "institution",
       "name": "Saifee School",
       "description": "Institution portal with student login, forms, and results.",
-      "tags": ["Laravel", "MySQL", "REST API"],
+      "tags": [
+        "Laravel",
+        "MySQL",
+        "REST API"
+      ],
       "url": "https://www.saifeeschool.in",
       "image": "img/projects/saifee1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -60,7 +102,10 @@
       "type": "portfolio",
       "name": "Raj Interiors",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Tailwind", "PHP"],
+      "tags": [
+        "Tailwind",
+        "PHP"
+      ],
       "url": "https://rajinteriors.in",
       "image": "img/projects/raj1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -68,7 +113,9 @@
       "type": "portfolio",
       "name": "Safe Technical India -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Wordpress"],
+      "tags": [
+        "Wordpress"
+      ],
       "url": "https://www.safetechnicalindia.in",
       "image": "img/projects/safetech1.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -76,7 +123,9 @@
       "type": "portfolio",
       "name": "Safe Technical -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Wordpress"],
+      "tags": [
+        "Wordpress"
+      ],
       "url": "https://www.safetechnical.in",
       "image": "img/projects/safetechcom.png?auto=compress&cs=tinysrgb&w=600"
     },
@@ -84,7 +133,9 @@
       "type": "portfolio",
       "name": "Fluidtech -Wordpress",
       "description": "Company portfolio site with services, and contact flows.",
-      "tags": ["Wordpress"],
+      "tags": [
+        "Wordpress"
+      ],
       "url": "https://fluidtech.co",
       "image": "img/projects/fluidtect1.png?auto=compress&cs=tinysrgb&w=600"
     }
