@@ -12,7 +12,7 @@
       ],
       "url": "https://liwaas.com",
       "thumbnail": "img/projects/liwaas_1st.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "project-images/liwaas",
+      "folder": "projects/liwaas",
       "images": [
         "01.png",
         "02.png"
@@ -30,7 +30,7 @@
       ],
       "url": "https://haneri.com",
       "thumbnail": "img/projects/haneri_1st.png",
-      "folder": "project-images/haneri",
+      "folder": "projects/haneri",
       "images": [
         "01.png",
         "02.png"
