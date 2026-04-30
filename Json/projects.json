@@ -47,10 +47,11 @@
       ],
       "url": "https://stockoutindia.com",
       "thumbnail": "img/projects/stockout1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/stockout",
       "images": [
-        "01.png",
-        "02.png"
+        "02.png",
+        "03.png",
+        "04.png"
       ]
     },
     {
