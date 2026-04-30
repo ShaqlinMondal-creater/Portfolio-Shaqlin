@@ -99,10 +99,9 @@
       ],
       "url": "https://sakberally.com/",
       "thumbnail": "img/projects/sakberally1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/sakberally",
       "images": [
-        "01.png",
-        "02.png"
+        "01.png"
       ]
     },
     {
@@ -116,7 +115,7 @@
       ],
       "url": "https://frostybusiness.com",
       "thumbnail": "img/projects/frosty1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/frosty",
       "images": [
         "01.png",
         "02.png"
@@ -133,7 +132,7 @@
       ],
       "url": "https://www.saifeeschool.in",
       "thumbnail": "img/projects/saifee1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/saifeeschool",
       "images": [
         "01.png",
         "02.png"
@@ -149,10 +148,9 @@
       ],
       "url": "https://rajinteriors.in",
       "thumbnail": "img/projects/raj1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/rajinteriors",
       "images": [
-        "01.png",
-        "02.png"
+        "01.png"
       ]
     },
     {
@@ -164,10 +162,9 @@
       ],
       "url": "https://www.safetechnicalindia.in",
       "thumbnail": "img/projects/safetech1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/safetechnicalindia",
       "images": [
-        "01.png",
-        "02.png"
+        "01.png"
       ]
     },
     {
@@ -179,10 +176,9 @@
       ],
       "url": "https://www.safetechnical.in",
       "thumbnail": "img/projects/safetechcom.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/safetechnical",
       "images": [
-        "01.png",
-        "02.png"
+        "01.png"
       ]
     },
     {
@@ -194,10 +190,9 @@
       ],
       "url": "https://fluidtech.co",
       "thumbnail": "img/projects/fluidtect1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/haneri",
+      "folder": "img/projects/fluidtech",
       "images": [
-        "01.png",
-        "02.png"
+        "01.png"
       ]
     }
   ]
