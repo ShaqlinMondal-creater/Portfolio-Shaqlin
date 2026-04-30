@@ -1014,6 +1014,41 @@
     </div>
   </footer>
 
+  <div id="projectGalleryModal" class="fixed inset-0 z-[99999] hidden bg-black/80 backdrop-blur-sm px-4 py-8">
+
+    <div class="max-w-6xl mx-auto glass-effect rounded-2xl overflow-hidden relative">
+
+      <button onclick="closeProjectGallery()"
+        class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center">
+        <i class="fas fa-times text-white"></i>
+      </button>
+
+      <div class="p-5 border-b border-white/10">
+        <h3 id="galleryProjectTitle" class="text-2xl font-bold text-blue-300"></h3>
+        <p class="text-gray-400 text-sm mt-1">Project screenshots preview</p>
+      </div>
+
+      <div class="p-5">
+        <div class="relative">
+          <img id="galleryMainImage" src="" alt="Project Image"
+            class="w-full max-h-[70vh] object-contain rounded-xl bg-black/30">
+
+          <button onclick="prevGalleryImage()"
+            class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <button onclick="nextGalleryImage()"
+            class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div id="galleryThumbs" class="flex gap-3 mt-5 overflow-x-auto pb-2"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -1094,33 +1129,49 @@
 
     function renderAllProjectCards(grid, items) {
       grid.innerHTML = '';
-      items.forEach(item => {
+
+      items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'project-card glass-effect rounded-2xl overflow-hidden';
 
         const typePill = typeToLabel(item.type);
+        const folder = item.folder || '';
+        const thumbnail = `${folder}/thumbnail.png`;
 
         card.innerHTML = `
-          <div class="relative">
-            <img
-              src="${item.image}"
-              alt="${escapeHtml(item.name)}"
-              class="w-full h-48 object-cover"
-              loading="lazy"
-              onerror="this.src='https://picsum.photos/600/300?grayscale&random=${Math.floor(Math.random() * 1000)}'">
-            ${typePill ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs bg-black/40 text-slate-200 border border-white/10">${typePill}</span>` : ''}
+        <div class="relative">
+          <img
+            src="${thumbnail}"
+            alt="${escapeHtml(item.name)}"
+            class="w-full h-48 object-cover"
+            loading="lazy"
+            onerror="this.src='https://picsum.photos/600/300?grayscale&random=${Math.floor(Math.random() * 1000)}'">
+
+          ${typePill ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs bg-black/40 text-slate-200 border border-white/10">${typePill}</span>` : ''}
+        </div>
+
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-blue-300 mb-2">${escapeHtml(item.name)}</h3>
+
+          <p class="text-gray-400 mb-4">
+            ${escapeHtml(item.description)}
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${(item.tags || []).map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-blue-300 mb-2">${escapeHtml(item.name)}</h3>
-            <p class="text-gray-400 mb-4">${escapeHtml(item.description)}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              ${(item.tags || []).map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
-            </div>
-            <button class="visit-btn" onclick="window.open('${item.url}', '_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
-          </div>
-        `;
+
+          <button type="button" class="visit-btn">
+            <i class="fas fa-images mr-2"></i>
+            View Project Images
+          </button>
+        </div>
+      `;
+
+        card.addEventListener('click', () => {
+          openProjectGallery(item);
+        });
+
         grid.appendChild(card);
       });
     }
@@ -1164,6 +1215,79 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadAllProjects);
+  </script>
+
+  <script>
+    let currentGalleryImages = [];
+    let currentGalleryIndex = 0;
+
+    function openProjectGallery(project) {
+      const modal = document.getElementById('projectGalleryModal');
+      const title = document.getElementById('galleryProjectTitle');
+
+      const folder = project.folder || '';
+      const images = project.images || [];
+
+      currentGalleryImages = images.map(img => `${folder}/${img}`);
+      currentGalleryIndex = 0;
+
+      title.textContent = project.name || 'Project Gallery';
+
+      if (!currentGalleryImages.length) {
+        currentGalleryImages = [`${folder}/thumbnail.png`];
+      }
+
+      updateGalleryImage();
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectGallery() {
+      const modal = document.getElementById('projectGalleryModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function updateGalleryImage() {
+      const mainImage = document.getElementById('galleryMainImage');
+      const thumbs = document.getElementById('galleryThumbs');
+
+      mainImage.src = currentGalleryImages[currentGalleryIndex];
+
+      thumbs.innerHTML = currentGalleryImages.map((src, index) => `
+      <button onclick="setGalleryImage(${index})"
+        class="shrink-0 rounded-lg overflow-hidden border ${index === currentGalleryIndex ? 'border-blue-400' : 'border-white/10'}">
+        <img src="${src}" class="w-24 h-16 object-cover">
+      </button>
+    `).join('');
+    }
+
+    function setGalleryImage(index) {
+      currentGalleryIndex = index;
+      updateGalleryImage();
+    }
+
+    function nextGalleryImage() {
+      currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+      updateGalleryImage();
+    }
+
+    function prevGalleryImage() {
+      currentGalleryIndex =
+        (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+      updateGalleryImage();
+    }
+
+    document.addEventListener('keydown', function (e) {
+      const modal = document.getElementById('projectGalleryModal');
+
+      if (!modal || modal.classList.contains('hidden')) return;
+
+      if (e.key === 'Escape') closeProjectGallery();
+      if (e.key === 'ArrowRight') nextGalleryImage();
+      if (e.key === 'ArrowLeft') prevGalleryImage();
+    });
   </script>
 </body>
 
