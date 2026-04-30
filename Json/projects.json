@@ -24,7 +24,13 @@
         "Razorpay"
       ],
       "url": "https://haneri.com",
-      "image": "img/projects/haneri_1st.png?auto=compress&cs=tinysrgb&w=600"
+      "thumbnail": "img/projects/haneri_1st.png",
+      "folder": "project-images/haneri",
+      "images": [
+        "01.jpg",
+        "02.jpg",
+        "03.png"
+      ]
     },
     {
       "type": "ecommerce",

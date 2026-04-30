@@ -1130,13 +1130,12 @@
     function renderAllProjectCards(grid, items) {
       grid.innerHTML = '';
 
-      items.forEach((item, index) => {
+      items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'project-card glass-effect rounded-2xl overflow-hidden';
 
         const typePill = typeToLabel(item.type);
-        const folder = item.folder || '';
-        const thumbnail = `${folder}/thumbnail.png`;
+        const thumbnail = item.thumbnail || `${item.folder}/thumbnail.png`;
 
         card.innerHTML = `
         <div class="relative">
@@ -1151,7 +1150,9 @@
         </div>
 
         <div class="p-6">
-          <h3 class="text-xl font-bold text-blue-300 mb-2">${escapeHtml(item.name)}</h3>
+          <h3 class="text-xl font-bold text-blue-300 mb-2">
+            ${escapeHtml(item.name)}
+          </h3>
 
           <p class="text-gray-400 mb-4">
             ${escapeHtml(item.description)}
@@ -1161,10 +1162,20 @@
             ${(item.tags || []).map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
           </div>
 
-          <button type="button" class="visit-btn">
-            <i class="fas fa-images mr-2"></i>
-            View Project Images
-          </button>
+          <div class="flex items-center justify-between gap-3">
+            <button type="button" class="visit-btn">
+              <i class="fas fa-images mr-2"></i>
+              View Images
+            </button>
+
+            ${item.url ? `
+              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()"
+                class="visit-btn hover:text-blue-300 transition">
+                <i class="fas fa-external-link-alt mr-2"></i>
+                Visit Site
+              </a>
+            ` : ''}
+          </div>
         </div>
       `;
 
@@ -1173,6 +1184,13 @@
         });
 
         grid.appendChild(card);
+
+        if (typeof observer !== 'undefined') {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(30px)';
+          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          observer.observe(card);
+        }
       });
     }
 
