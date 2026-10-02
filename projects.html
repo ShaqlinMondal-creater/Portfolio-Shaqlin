@@ -32,7 +32,8 @@
       woocommerce: 'WooCommerce Projects',
       institution: 'Institution Portal Projects',
       // inventory: 'Inventory Management Projects',
-      portfolio: 'Company Portfolio Projects'
+      portfolio: 'Company Portfolio Projects',
+      ongoing: 'In Progress / Draft Projects'
     };
 
     async function loadProjects() {
@@ -98,23 +99,86 @@
       }
     }
 
+    function homepageScreenshot(url) {
+      if (!url) return '';
+      return `https://image.thum.io/get/width/600/crop/338/noanimate/${url}`;
+    }
+
+    function styledPlaceholder(name = 'Project') {
+      const safe = String(name)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#0f172a"/>
+              <stop offset="1" stop-color="#1e3a5f"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="338" fill="url(#g)"/>
+          <circle cx="520" cy="60" r="90" fill="#38bdf8" fill-opacity=".08"/>
+          <text x="40" y="160" fill="#93c5fd" font-family="Segoe UI,Arial,sans-serif" font-size="34" font-weight="700">${safe}</text>
+          <text x="40" y="200" fill="#94a3b8" font-family="Segoe UI,Arial,sans-serif" font-size="16">Homepage preview unavailable — open live site</text>
+        </svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    }
+
+    function getProjectThumbnail(item) {
+      if (item.thumbnail) return item.thumbnail;
+      if (item.image) return item.image;
+      if (item.folder) return `${item.folder}/thumbnail.png`;
+      if (item.url) return homepageScreenshot(item.url);
+      return styledPlaceholder(item.name);
+    }
+
+    function handleThumbError(img) {
+      const siteUrl = img.dataset.siteUrl || '';
+      const name = img.dataset.projectName || 'Project';
+
+      if (siteUrl && img.dataset.triedAlt !== '1') {
+        img.dataset.triedAlt = '1';
+        img.src = `https://api.microlink.io/?url=${encodeURIComponent(siteUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
+        return;
+      }
+
+      img.onerror = null;
+      img.src = styledPlaceholder(name);
+    }
+
     function renderCards(grid, items) {
       grid.innerHTML = '';
       items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'project-card glass-effect rounded-2xl';
         card.setAttribute('data-type', item.type);
+        const isDraft = (item.status || '').toLowerCase() === 'draft' || (item.type || '').toLowerCase() === 'ongoing';
+        const thumb = getProjectThumbnail(item);
+        const siteUrlAttr = item.url ? `data-site-url="${escapeHtml(item.url)}"` : '';
+        const nameAttr = `data-project-name="${escapeHtml(item.name || 'Project')}"`;
         card.innerHTML = `
-          <img src="${item.image}" alt="${escapeHtml(item.name)}">
+          <div style="position:relative">
+            <img src="${thumb}" alt="${escapeHtml(item.name)}"
+              style="object-position:top"
+              loading="lazy"
+              ${siteUrlAttr}
+              ${nameAttr}
+              onerror="handleThumbError(this)">
+            ${isDraft ? `<span style="position:absolute;top:.75rem;right:.75rem;padding:.25rem .7rem;border-radius:9999px;font-size:.7rem;background:rgba(245,158,11,.2);color:#fde68a;border:1px solid rgba(251,191,36,.4)">In Progress</span>` : ''}
+          </div>
           <div class="p-6">
             <h3 class="text-xl font-bold" style="color:#93c5fd;margin-bottom:.35rem">${escapeHtml(item.name)}</h3>
             <p style="color:#94a3b8;margin-bottom:1rem">${escapeHtml(item.description)}</p>
             <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem">
-              ${item.tags.map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
+              ${(item.tags || []).map(t => `<span class="tag-sm">${escapeHtml(t)}</span>`).join('')}
             </div>
-            <button class="visit-btn" onclick="window.open('${item.url}','_blank')">
-              <i class="fas fa-external-link-alt mr-2"></i>Visit
-            </button>
+            ${item.url ? `
+              <button class="visit-btn" onclick="window.open('${item.url}','_blank')">
+                <i class="fas fa-external-link-alt mr-2"></i>Visit
+              </button>
+            ` : `<span style="font-size:.75rem;color:#fde68a">Draft / Ongoing</span>`}
           </div>`;
         grid.appendChild(card);
       });
@@ -150,6 +214,7 @@
         <a class="tab-pill" data-tab="institution" href="?type=institution">Institution Portal</a>
         <!-- <a class="tab-pill" data-tab="inventory"   href="?type=inventory">Inventory Management</a> -->
         <a class="tab-pill" data-tab="portfolio"   href="?type=portfolio">Company Portfolio</a>
+        <a class="tab-pill" data-tab="ongoing"     href="?type=ongoing">In Progress</a>
       </div>
 
       <!-- Cards (injected from JSON) -->

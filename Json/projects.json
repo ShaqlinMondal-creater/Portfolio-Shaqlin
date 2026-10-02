@@ -1,6 +1,23 @@
 {
   "projects": [
     {
+      "type": "institution",
+      "name": "Saifee School",
+      "description": "Institution portal with student login, forms, and results.",
+      "tags": [
+        "Laravel",
+        "MySQL",
+        "REST API"
+      ],
+      "url": "https://www.saifeeschool.in",
+      "thumbnail": "img/projects/saifee1.png?auto=compress&cs=tinysrgb&w=600",
+      "folder": "img/projects/saifeeschool",
+      "images": [
+        "01.png",
+        "02.png"
+      ]
+    },
+    {
       "type": "ecommerce",
       "name": "Liwaas",
       "description": "Own Brand fashion store with payments, coupons, and admin analytics.",
@@ -72,6 +89,85 @@
       ]
     },
     {
+      "type": "ongoing",
+      "status": "draft",
+      "name": "BhuriBhoj",
+      "description": "Mess management system — meal plans, members, and daily mess operations. Work in progress.",
+      "tags": [
+        "Next.js",
+        "React",
+        "Vercel"
+      ],
+      "url": "https://bhuribhoj-v1.vercel.app/",
+      "thumbnail": "img/projects/bhuribhoj1.png",
+      "folder": "img/projects/bhuribhoj",
+      "images": [
+        "01.png",
+        "02.png",
+        "03.png",
+        "04.png"
+      ]
+    },
+    {
+      "type": "ongoing",
+      "status": "draft",
+      "name": "Northline",
+      "description": "Task management system for teams — boards, tasks, and progress tracking. Work in progress.",
+      "tags": [
+        "React",
+        "Next.js",
+        "Vercel"
+      ],
+      "url": "https://task-management-system-2026.vercel.app/",
+      "thumbnail": "img/projects/northline1.png",
+      "folder": "img/projects/northline",
+      "images": [
+        "01.png",
+        "02.png",
+        "03.png",
+        "04.png",
+        "05.png",
+        "06.png",
+        "07.png"
+      ]
+    },
+    {
+      "type": "ongoing",
+      "status": "draft",
+      "name": "Shaqlin Portfolio 26",
+      "description": "Personal portfolio rebuilt with Next.js — new layout and experience. Work in progress.",
+      "tags": [
+        "Next.js",
+        "React",
+        "Tailwind"
+      ],
+      "url": "https://shaqlin-portfolio-26.vercel.app/",
+      "thumbnail": "img/projects/portfolio26_1.png",
+      "folder": "img/projects/portfolio26",
+      "images": [
+        "01.png"
+      ]
+    },
+    {
+      "type": "ongoing",
+      "status": "draft",
+      "name": "Wishme",
+      "description": "Create digital wishing surprises to share with someone special. Work in progress.",
+      "tags": [
+        "React",
+        "Vercel"
+      ],
+      "url": "https://wishme-react.vercel.app/",
+      "thumbnail": "img/projects/wishme1.png",
+      "folder": "img/projects/wishme",
+      "images": [
+        "01.png",
+        "02.png",
+        "03.png",
+        "04.png"
+      ]
+    },
+    {
       "type": "woocommerce",
       "name": "Johar Traders",
       "description": "WooCommerce storefront .",
@@ -116,23 +212,6 @@
       "url": "https://frostybusiness.com",
       "thumbnail": "img/projects/frosty1.png?auto=compress&cs=tinysrgb&w=600",
       "folder": "img/projects/frosty",
-      "images": [
-        "01.png",
-        "02.png"
-      ]
-    },
-    {
-      "type": "institution",
-      "name": "Saifee School",
-      "description": "Institution portal with student login, forms, and results.",
-      "tags": [
-        "Laravel",
-        "MySQL",
-        "REST API"
-      ],
-      "url": "https://www.saifeeschool.in",
-      "thumbnail": "img/projects/saifee1.png?auto=compress&cs=tinysrgb&w=600",
-      "folder": "img/projects/saifeeschool",
       "images": [
         "01.png",
         "02.png"
@@ -194,6 +273,6 @@
       "images": [
         "01.png"
       ]
-    }
+    }    
   ]
 }

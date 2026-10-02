@@ -889,6 +889,7 @@
         <a href="projects.html?type=institution" class="tab-pill">Institution Portal</a>
         <!-- <a href="projects.html?type=inventory" class="tab-pill">Inventory Management</a> -->
         <a href="projects.html?type=portfolio" class="tab-pill">Company Portfolio</a>
+        <a href="projects.html?type=ongoing" class="tab-pill">In Progress</a>
       </div>
 
       <!-- Cards injected here -->
@@ -1127,6 +1128,57 @@
       }
     }
 
+    function homepageScreenshot(url) {
+      if (!url) return '';
+      // Live homepage capture (avoid WordPress mShots — it often sticks on "Generating Preview")
+      return `https://image.thum.io/get/width/600/crop/338/noanimate/${url}`;
+    }
+
+    function styledPlaceholder(name = 'Project') {
+      const safe = String(name)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#0f172a"/>
+              <stop offset="1" stop-color="#1e3a5f"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="338" fill="url(#g)"/>
+          <circle cx="520" cy="60" r="90" fill="#38bdf8" fill-opacity=".08"/>
+          <text x="40" y="160" fill="#93c5fd" font-family="Segoe UI,Arial,sans-serif" font-size="34" font-weight="700">${safe}</text>
+          <text x="40" y="200" fill="#94a3b8" font-family="Segoe UI,Arial,sans-serif" font-size="16">Homepage preview unavailable — open live site</text>
+        </svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    }
+
+    function getProjectThumbnail(item) {
+      if (item.thumbnail) return item.thumbnail;
+      if (item.image) return item.image;
+      if (item.folder) return `${item.folder}/thumbnail.png`;
+      if (item.url) return homepageScreenshot(item.url);
+      return styledPlaceholder(item.name);
+    }
+
+    function handleThumbError(img) {
+      const siteUrl = img.dataset.siteUrl || '';
+      const name = img.dataset.projectName || 'Project';
+
+      // One more screenshot provider, then a clean SVG card (never WordPress placeholders)
+      if (siteUrl && img.dataset.triedAlt !== '1') {
+        img.dataset.triedAlt = '1';
+        img.src = `https://api.microlink.io/?url=${encodeURIComponent(siteUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
+        return;
+      }
+
+      img.onerror = null;
+      img.src = styledPlaceholder(name);
+    }
+
     function renderAllProjectCards(grid, items) {
       grid.innerHTML = '';
 
@@ -1135,18 +1187,25 @@
         card.className = 'project-card glass-effect rounded-2xl overflow-hidden';
 
         const typePill = typeToLabel(item.type);
-        const thumbnail = item.thumbnail || `${item.folder}/thumbnail.png`;
+        const isDraft = (item.status || '').toLowerCase() === 'draft' || (item.type || '').toLowerCase() === 'ongoing';
+        const hasImages = Array.isArray(item.images) && item.images.length > 0;
+        const thumbnail = getProjectThumbnail(item);
+        const siteUrlAttr = item.url ? `data-site-url="${escapeHtml(item.url)}"` : '';
+        const nameAttr = `data-project-name="${escapeHtml(item.name || 'Project')}"`;
 
         card.innerHTML = `
         <div class="relative">
           <img
             src="${thumbnail}"
             alt="${escapeHtml(item.name)}"
-            class="w-full h-48 object-cover"
+            class="w-full h-48 object-cover object-top${isDraft ? ' opacity-90' : ''}"
             loading="lazy"
-            onerror="this.src='https://picsum.photos/600/300?grayscale&random=${Math.floor(Math.random() * 1000)}'">
+            ${siteUrlAttr}
+            ${nameAttr}
+            onerror="handleThumbError(this)">
 
-          ${typePill ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs bg-black/40 text-slate-200 border border-white/10">${typePill}</span>` : ''}
+          ${typePill && !isDraft ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs bg-black/40 text-slate-200 border border-white/10">${typePill}</span>` : ''}
+          ${isDraft ? `<span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs bg-amber-500/20 text-amber-200 border border-amber-400/40">In Progress</span>` : ''}
         </div>
 
         <div class="p-6">
@@ -1163,10 +1222,12 @@
           </div>
 
           <div class="flex items-center justify-between gap-3">
-            <button type="button" class="visit-btn">
-              <i class="fas fa-images mr-2"></i>
-              View Images
-            </button>
+            ${hasImages ? `
+              <button type="button" class="visit-btn view-images-btn">
+                <i class="fas fa-images mr-2"></i>
+                View Images
+              </button>
+            ` : `<span class="text-xs text-amber-200/80">${isDraft ? 'Draft / Ongoing' : ''}</span>`}
 
             ${item.url ? `
               <a href="${item.url}" target="_blank" onclick="event.stopPropagation()"
@@ -1180,7 +1241,11 @@
       `;
 
         card.addEventListener('click', () => {
-          openProjectGallery(item);
+          if (hasImages) {
+            openProjectGallery(item);
+          } else if (item.url) {
+            window.open(item.url, '_blank');
+          }
         });
 
         grid.appendChild(card);
@@ -1200,7 +1265,8 @@
         woocommerce: 'WooCommerce',
         institution: 'Institution Portal',
         inventory: 'Inventory Management',
-        portfolio: 'Company Portfolio'
+        portfolio: 'Company Portfolio',
+        ongoing: 'In Progress'
       };
       return map[(type || '').toLowerCase()] || '';
     }
